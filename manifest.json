@@ -1,0 +1,19 @@
+{
+  "name": "GSPro",
+  "description" : "Base Level Extension",
+  "version": "0.1",
+  "manifest_version": 2,
+  "permissions": [
+    "tabs",
+    "http://develop.eisuks.office.quarta-vk.ru/*",
+    "*://mail.gossluzhba.gov.ru/owa/rezerv@gossluzhba.gov.ru/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://mail.gossluzhba.gov.ru/owa/rezerv@gossluzhba.gov.ru/*"],
+      "run_at": "document_idle",
+      "all_frames": true,
+      "js": ["contentScript.js"]
+    }
+  ]
+}
