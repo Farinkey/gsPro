@@ -2,8 +2,9 @@
 
 // let msgList = document.querySelector(".conductorContent");
 
-document.body.addEventListener("click", function() {
-  document.addEventListener("DOMContentLoaded", function() {
+// document.addEventListener('load readystatechange', () => console.log(document.readyState));
+// document.body.addEventListener("click", function() {
+  window.addEventListener("readystatechange", function() {
     let theme = document.querySelector('.allowTextSelection span'),
     // reNum = /5*/,
     btnsField = document.querySelector('._rp_Y div'),
@@ -14,7 +15,7 @@ document.body.addEventListener("click", function() {
     btn.textContent = 'На вторую';
     btnsField.insertBefore(btn, reply);
   });
-});
+// });
 
 
 // let theme = document.querySelector('.allowTextSelection span'),
