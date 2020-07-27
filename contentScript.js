@@ -1,43 +1,70 @@
 "use strict";
 
-// let msgList = document.querySelector(".conductorContent");
-
-// document.addEventListener('load readystatechange', () => console.log(document.readyState));
-// document.body.addEventListener("click", function() {
-  window.addEventListener("readystatechange", function() {
-    let theme = document.querySelector('.allowTextSelection span'),
-    // reNum = /5*/,
-    btnsField = document.querySelector('._rp_Y div'),
-    reply = document.querySelector('button[autoid="_rp_g"]'),
+let reNum = /[5]{1}[0-9]{5}/,
+    refNum,
+    userName = "Симеон",
     btn = document.createElement('button');
 
-    btn.classList.add('_rp_31', 'ms-font-xs', 'o365button', 'ms-font-m', 'ms-font-color-neutralSecondary');
-    btn.textContent = 'На вторую';
-    btnsField.insertBefore(btn, reply);
-  });
-// });
+// document.addEventListener('load readystatechange', () => );
+function start() {
+  let msgs = document.querySelector("._lv_I3")
+  if (msgs != null) {
+    msgs.addEventListener("click", () => {
+      let btnsField = document.querySelector('._rp_Y div'),
+          reply = document.querySelector('button[autoid="_rp_g"]'),
+          mainTheme = document.querySelector('span[autoid="_rp_I"]').textContent || document.querySelector('input[autoid="_mcp_k"]').value;
 
+      if (document.querySelector('.optButton') == (null || undefined) && btnsField != null) {
+        btn.classList.add('_rp_31', 'ms-font-xs', 'o365button', 'ms-font-m', 'ms-font-color-neutralSecondary', 'optButton');
+        btn.style = "font-family: 'o365Icons'!important; padding: 9px 0; font-size: 11px; vertical-align: middle; text-transform: uppercase;";
+        btn.textContent = 'На вторую';
+        btnsField.insertBefore(btn, reply);
+      };
 
-// let theme = document.querySelector('.allowTextSelection span'),
-//     // reNum = /5*/,
-//     btnsFiels = document.querySelector('._rp_Y div'),
-//     reply = document.querySelector('button[autoid="_rp_g"]'),
-//     btn = document.createElement('button');
+      if (reNum.exec(mainTheme) != null && reNum.exec(mainTheme)[0] >= 500000) {
+        return refNum = reNum.exec(mainTheme)[0];
+      } else {
+        return refNum = false;
+      };
+    });
+  } else {
+    setTimeout(start, 500);
+  }
+};
 
-// btnsFiels.insertBefore(btn, reply);
-// btn.classList.add('_rp_31', 'ms-font-xs o365button', 'ms-font-m ms-font-color-neutralSecondary');
-// btn.textContent = 'На вторую';
+start();
 
-// btn.addEventListener("click", function() {
-//   // if (theme.search(reNum) != -1)
-//   if (document.querySelector('.attachmentWell div div div div div table tbody tr td div div') != null) {
-//     document.querySelector('button[autoid="_rp_i"]').click();
-//   } else {
-//     document.querySelector('button[autoid="_rp_h"]').click()
-//   }
-// });
+btn.addEventListener("click", function init() {
+  // Проверка наличия вложений
+  if (document.querySelector('.attachmentWell div div div div div table tbody tr td div div') != null) {
+    document.querySelector('button[autoid="_rp_i"]').click();
+    iframeLoad();
+  } else {
+    document.querySelector('button[autoid="_rp_h"]').click();
+    iframeLoad();
+  };
+});
 
-// setTimeout(() => {
-//   let firstMsg = document.querySelector('button[autoid="_lv_B"]');
-//   firstMsg.click();
-// }, 1000); 
+function textGen() {
+  document.getElementById('EditorBody').onload = () => {
+    let textIframe = document.getElementById('EditorBody').contentDocument;
+    let msgField = textIframe.querySelector("#Signature > div > p:nth-child(1) > span"),
+        msgSign = textIframe.querySelector("#Signature > div > p:nth-child(2) > span:nth-child(2)");
+
+    if (refNum) {
+      msgField.innerHTML = `Добрый день!<br>Обращение №${refNum}<br><br>Ваше обращение передано специалистам. По исполнению сообщим дополнительно.<br>`;
+    } else {
+      msgField.innerHTML = `Добрый день!<br>Обращение №${refNum}<br><br>Ваше обращение зарегистрировано и передано специалистам. По исполнению сообщим дополнительно.<br>`;
+    };
+
+    msgSign.textContent = `С уважение, ${userName}`
+  };
+};
+
+function iframeLoad() {
+  try {
+    textGen();
+  } catch {
+    setTimeout(textGen, 1000);
+  };
+};
