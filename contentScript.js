@@ -2,7 +2,7 @@
 
 let reNum = /[5]{1}[0-9]{5}/,
     refNum,
-    userName = "Симеон",
+    userName = "Панин Симеон",
     btn = document.createElement('button');
 
 // document.addEventListener('load readystatechange', () => );
@@ -51,13 +51,17 @@ function textGen() {
     let msgField = textIframe.querySelector("#Signature > div > p:nth-child(1) > span"),
         msgSign = textIframe.querySelector("#Signature > div > p:nth-child(2) > span:nth-child(2)");
 
+    textIframe.querySelector("#MicrosoftOWAEditorRegion").children[0].remove();
+    textIframe.querySelector("#MicrosoftOWAEditorRegion").children[0].remove();
+
     if (refNum) {
       msgField.innerHTML = `Добрый день!<br>Обращение №${refNum}<br><br>Ваше обращение передано специалистам. По исполнению сообщим дополнительно.<br>`;
+      addOld();
     } else {
       msgField.innerHTML = `Добрый день!<br>Обращение №${refNum}<br><br>Ваше обращение зарегистрировано и передано специалистам. По исполнению сообщим дополнительно.<br>`;
     };
 
-    msgSign.textContent = `С уважение, ${userName}`
+    msgSign.textContent = `С уважение, ${userName}`;
   };
 };
 
@@ -67,4 +71,8 @@ function iframeLoad() {
   } catch {
     setTimeout(textGen, 1000);
   };
+};
+
+function addOld() {
+  // chrome.runtime.sendMessage(refNum);
 };

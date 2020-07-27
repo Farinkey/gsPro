@@ -5,7 +5,7 @@
   "manifest_version": 2,
   "permissions": [
     "tabs",
-    "http://develop.eisuks.office.quarta-vk.ru/*",
+    "*://gossluzhba.gov.ru/*",
     "*://mail.gossluzhba.gov.ru/owa/rezerv@gossluzhba.gov.ru/*"
   ],
   "content_scripts": [
@@ -14,6 +14,16 @@
       "run_at": "document_idle",
       "all_frames": true,
       "js": ["contentScript.js"]
+    },
+    {
+      "matches": ["*://gossluzhba.gov.ru/*"],
+      "run_at": "document_idle",
+      "all_frames": true,
+      "js": ["content.js"]
     }
-  ]
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": ["background.js"]
+  }
 }
