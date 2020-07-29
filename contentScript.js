@@ -2,12 +2,12 @@
 
 let reNum = /[5]{1}[0-9]{5}/,
     refNum,
-    userName = "Панин Симеон",
+    userName = prompt("Как звать?", localStorage.name),
     btn = document.createElement('button');
 
 // document.addEventListener('load readystatechange', () => );
 function start() {
-  let msgs = document.querySelector("._lv_I3")
+  let msgs = document.querySelector("._lv_I3");
   if (msgs != null) {
     msgs.addEventListener("click", () => {
       let btnsField = document.querySelector('._rp_Y div'),
@@ -19,18 +19,20 @@ function start() {
         btn.style = "font-family: 'o365Icons'!important; padding: 9px 0; font-size: 11px; vertical-align: middle; text-transform: uppercase;";
         btn.textContent = 'На вторую';
         btnsField.insertBefore(btn, reply);
-      };
+      }
 
       if (reNum.exec(mainTheme) != null && reNum.exec(mainTheme)[0] >= 500000) {
-        return refNum = reNum.exec(mainTheme)[0];
+        refNum = reNum.exec(mainTheme)[0];
+        return refNum;
       } else {
-        return refNum = false;
-      };
+        refNum = false;
+        return refNum;
+      }
     });
   } else {
     setTimeout(start, 500);
   }
-};
+}
 
 start();
 
@@ -42,7 +44,7 @@ btn.addEventListener("click", function init() {
   } else {
     document.querySelector('button[autoid="_rp_h"]').click();
     iframeLoad();
-  };
+  }
 });
 
 function textGen() {
@@ -59,20 +61,20 @@ function textGen() {
       addOld();
     } else {
       msgField.innerHTML = `Добрый день!<br>Обращение №${refNum}<br><br>Ваше обращение зарегистрировано и передано специалистам. По исполнению сообщим дополнительно.<br>`;
-    };
+    }
 
     msgSign.textContent = `С уважение, ${userName}`;
   };
-};
+}
 
 function iframeLoad() {
   try {
     textGen();
   } catch {
     setTimeout(textGen, 1000);
-  };
-};
+  }
+}
 
 function addOld() {
   // chrome.runtime.sendMessage(refNum);
-};
+}
