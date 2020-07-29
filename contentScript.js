@@ -2,8 +2,13 @@
 
 let reNum = /[5]{1}[0-9]{5}/,
     refNum,
-    userName = prompt("Как звать?", localStorage.name),
+    userName = prompt("Как звать?", localStorage.getItem('usName')),
     btn = document.createElement('button');
+
+if (typeof(userName) === "string") {
+  localStorage.setItem('usName', userName);
+  start();
+}
 
 // document.addEventListener('load readystatechange', () => );
 function start() {
@@ -34,7 +39,7 @@ function start() {
   }
 }
 
-start();
+// start();
 
 btn.addEventListener("click", function init() {
   // Проверка наличия вложений
@@ -76,5 +81,5 @@ function iframeLoad() {
 }
 
 function addOld() {
-  // chrome.runtime.sendMessage(refNum);
+  chrome.runtime.sendMessage(refNum);
 }
