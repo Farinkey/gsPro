@@ -5,8 +5,9 @@
   "manifest_version": 2,
   "permissions": [
     "tabs",
+    "webNavigation",
     "*://gossluzhba.gov.ru/*",
-    "*://mail.gossluzhba.gov.ru/owa/rezerv@gossluzhba.gov.ru/*"
+    "*://mail.gossluzhba.gov.ru/owa/rezerv@gossluzhba.gov.ru/#path=/mail"
   ],
   "content_scripts": [
     {

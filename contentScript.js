@@ -2,13 +2,15 @@
 
 let reNum = /[5]{1}[0-9]{5}/,
     refNum,
-    userName = prompt("Как звать?", localStorage.getItem('usName')),
+    userName = localStorage.getItem('usName'),
     btn = document.createElement('button');
 
-if (typeof(userName) === "string") {
+if (typeof(userName) !== "string") {
+  userName = prompt("Как звать?", localStorage.getItem('usName'));
   localStorage.setItem('usName', userName);
+} else {
   start();
-}
+};
 
 // document.addEventListener('load readystatechange', () => );
 function start() {
