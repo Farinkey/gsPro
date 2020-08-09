@@ -3,16 +3,35 @@ let facts = document.querySelector(`a[ng-click="setState('factWorks')"]`),
 
 facts.click();
 
-contentBlock.addEventListener("DOMNodeInserted", factAdd);
+factAdd();
 
 function factAdd() {
-  let addFactBtn = document.querySelector(`[data-ng-click="add()"]`);
-  addFactBtn.click();
+  if (document.querySelector(`[data-ng-click="add()"]`) != null) {
+    let addFactBtn = document.querySelector(`[data-ng-click="add()"]`);
+    addFactBtn.click();
 
-  contentBlock.removeEventListener("DOMNodeInserted", factAdd);
+    document.addEventListener("load", () => {
+      factGen();
+    });
+  } else {
+    setTimeout(factAdd, 500);
+  }
+}
 
-  document.addEventListener("load", () => {
-    document.querySelector("#s2id_autogen45 > a").click();
-    document.querySelector("#select2-results-46 > li:nth-child(1)").click();
-  });
+function factGen() {
+  if (document.querySelectorAll('.form-group').length > 5) {
+    let formGroup = document.querySelectorAll('.form-group');
+    doClick(formGroup[5].querySelector('a'));
+  } else {
+    setTimeout(factGen, 500);
+  }
+}
+
+function doClick(n) {
+    e = document.createEvent("MouseEvents");  
+    e.initEvent("mousedown", true, false);  
+    n.dispatchEvent(e,true); 
+    e = document.createEvent("MouseEvents");  
+    e.initEvent("mouseup", true, false);  
+    n.dispatchEvent(e,true);
 }
